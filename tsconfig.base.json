@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@serverless/mysql-lib": ["libs/mysql-lib/src/index.ts"],
+      "@serverless/response-lib": ["libs/response-lib/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
