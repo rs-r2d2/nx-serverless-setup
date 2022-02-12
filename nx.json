@@ -12,9 +12,10 @@
     }
   },
   "projects": {
-    "lambda1": { "tags": [] },
-    "lambda2": { "tags": [] },
+    "lambda1": { "tags": ["non-layered"] },
+    "lambda2": { "tags": ["layered"] },
     "mysql-lib": { "tags": [] },
-    "response-lib": { "tags": [] }
+    "response-lib": { "tags": [] },
+    "lambdalayer": { "tags": [] }
   }
 }

@@ -3,7 +3,9 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
-    "types": ["node"]
+    "types": ["node"],
+    "target": "es2017",
+    "esModuleInterop": true
   },
   "exclude": ["**/*.spec.ts"],
   "include": ["**/*.ts"]

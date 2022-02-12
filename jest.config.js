@@ -4,5 +4,6 @@ module.exports = {
     '<rootDir>/apps/lambda2',
     '<rootDir>/libs/mysql-lib',
     '<rootDir>/libs/response-lib',
+    '<rootDir>/apps/lambdalayer',
   ],
 };

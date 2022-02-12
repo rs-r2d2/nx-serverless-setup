@@ -17,10 +17,9 @@
             "tsConfig": "apps/lambda1/tsconfig.app.json",
             "assets": ["apps/lambda1/src/assets"],
             "generatePackageJson": true,
-            "maxWorkers": 1,
-            "memoryLimit": 512,
             "progress": true,
-            "sourceMap": false
+            "sourceMap": false,
+            "externalDependencies": ["mysql"]
           },
           "configurations": {
             "production": {
@@ -68,7 +67,8 @@
             "main": "apps/lambda2/src/main.ts",
             "tsConfig": "apps/lambda2/tsconfig.app.json",
             "assets": ["apps/lambda2/src/assets"],
-            "generatePackageJson": true
+            "generatePackageJson": true,
+            "externalDependencies": ["express", "serverless-http"]
           },
           "configurations": {
             "production": {
@@ -135,6 +135,54 @@
           "outputs": ["coverage/libs/response-lib"],
           "options": {
             "jestConfig": "libs/response-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lambdalayer": {
+      "root": "apps/lambdalayer",
+      "sourceRoot": "apps/lambdalayer/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/lambdalayer/nodejs",
+            "main": "apps/lambdalayer/src/main.ts",
+            "tsConfig": "apps/lambdalayer/tsconfig.app.json",
+            "assets": ["apps/lambdalayer/src/assets"],
+            "generatePackageJson": true,
+            "externalDependencies": "all"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/lambdalayer/src/environments/environment.ts",
+                  "with": "apps/lambdalayer/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": { "buildTarget": "lambdalayer:build" }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["apps/lambdalayer/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/lambdalayer"],
+          "options": {
+            "jestConfig": "apps/lambdalayer/jest.config.js",
             "passWithNoTests": true
           }
         }
